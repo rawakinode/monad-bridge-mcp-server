@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+# monad-bridge-mcp-server
+Monad MCP server for Bridge tools
+=======
 
 # Monad Bridge MCP Server
 
@@ -58,3 +62,4 @@ This project is available on GitHub:
 ---
 
 Developed by [Rawakinode](https://github.com/rawakinode)
+>>>>>>> 0bbb652 (new commit)
