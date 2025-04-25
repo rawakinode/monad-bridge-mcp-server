@@ -19,10 +19,23 @@ This MCP server provides the following tools:
 
 ## 🛠 Configuration
 
-Make sure to set up your `.env` file with the following environment variable:
+Make sure to set up your `claude_dekstop_config.json` file with the following environment variable:
 
-```env
-PRIVATE_KEY=your_private_key_here
+```json
+{
+  "mcpServers": {
+    "monad-mcp": {
+      "command": "node",
+      "args": [
+        "<your-local-path>monad-bridge-mcp-server\\build\\index.js"
+      ],
+      "env": {
+        "PRIVATE_KEY": "<your-private-key>" 
+      }
+    }
+  }
+}
+
 ```
 
 ## 🧱 Server Initialization
@@ -41,13 +54,6 @@ const server = new McpServer({
 });
 ```
 
-## 🧪 Providers Used
-
-```ts
-const sepoliaProvider = new ethers.JsonRpcProvider("https://eth-sepolia.g.alchemy.com/v2/...");
-const monadProvider = new ethers.JsonRpcProvider("https://monad-testnet.g.alchemy.com/v2/...");
-```
-
 ## 🔗 Important Links
 
 - [View on Etherscan Sepolia](https://sepolia.etherscan.io/)
@@ -55,11 +61,6 @@ const monadProvider = new ethers.JsonRpcProvider("https://monad-testnet.g.alchem
 - [Wormhole Scan (Testnet)](https://wormholescan.io/?network=Testnet)
 
 ## 📦 Repository
-
-This project is available on GitHub:  
-🔗 [rawakinode/monad-bridge-mpc-server](https://github.com/rawakinode/monad-bridge-mpc-server)
-
----
 
 Developed by [Rawakinode](https://github.com/rawakinode)
 >>>>>>> 0bbb652 (new commit)
