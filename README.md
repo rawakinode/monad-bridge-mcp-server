@@ -1,8 +1,4 @@
 
-# monad-bridge-mcp-server
-Monad MCP server for Bridge tools
-=======
-
 # Monad Bridge MCP Server
 
 A lightweight Model Context Protocol (MCP) server that enables bridging functionality between Ethereum Sepolia and Monad Testnet networks using the Wormhole bridge.
