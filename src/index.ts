@@ -80,24 +80,17 @@ server.tool(
  */
 server.tool(
     "get-mon-balance",
-    "Get MON balance for an address on Monad testnet",
-    {
-        address: z
-        .string()
-        .min(1, "Address is required")
-        .regex(/^0x[a-fA-F0-9]{40}$/, "Invalid Ethereum address format")
-        .describe("Address on Monad testnet to check MON balance for")
-    },
-    async ({ address }) => {
+    "Get MON balance for an my address on Monad testnet",
+    async () => {
         try {
-        const balance = await monadProvider.getBalance(address);
+        const balance = await monadProvider.getBalance(clientMonad.address);
         return {
             content: [
             {
                 type: "text",
                 text: `📍 **MON Balance Check (Monad Testnet)**
                 
-                **Address:** \`${address}\`
+                **Address:** \`${clientMonad.address}\`
                 **Balance:** ${ethers.formatUnits(balance, 18)} MON`
             }
             ]
@@ -107,7 +100,7 @@ server.tool(
             content: [
                 {
                     type: "text",
-                    text: `❌ Failed to retrieve MON balance for address: \`${address}\`.
+                    text: `❌ Failed to retrieve MON balance for address: \`${clientMonad.address}\`.
 
                     **Error:** ${error instanceof Error ? error.message : String(error)}`
                 }
@@ -128,24 +121,17 @@ server.tool(
  */
 server.tool(
     "get-eth-balance",
-    "Get ETH balance for an address on Sepolia testnet",
-    {
-        address: z
-        .string()
-        .min(1, "Address is required")
-        .regex(/^0x[a-fA-F0-9]{40}$/, "Invalid Ethereum address format")
-        .describe("Ethereum Sepolia address to check ETH balance for")
-    },
-    async ({ address }) => {
+    "Get ETH balance for my address on Sepolia testnet",
+    async () => {
         try {
-        const balance = await sepoliaProvider.getBalance(address);
+        const balance = await sepoliaProvider.getBalance(clientSepolia.address);
         return {
             content: [
             {
                 type: "text",
                 text: `📍 **ETH Balance Check (Sepolia Testnet)**
 
-                **Address:** \`${address}\`
+                **Address:** \`${clientSepolia.address}\`
                 **Balance:** ${ethers.formatEther(balance)} ETH`
             }
             ]
@@ -153,12 +139,12 @@ server.tool(
         } catch (error) {
         return {
             content: [
-            {
-                type: "text",
-                text: `❌ Failed to retrieve ETH balance for address: \`${address}\`.
+              {
+                  type: "text",
+                  text: `❌ Failed to retrieve ETH balance for address: \`${clientSepolia.address}\`.
 
-                **Error:** ${error instanceof Error ? error.message : String(error)}`
-            }
+                  **Error:** ${error instanceof Error ? error.message : String(error)}`
+              }
             ]
         };
         }
