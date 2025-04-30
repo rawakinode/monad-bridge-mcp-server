@@ -30,6 +30,7 @@ const server = new McpServer({
     "get-wmon-sepolia-balance",
     "bridge-sepolia-wmon-to-monad",
     "bridge-monad-to-sepolia-wmon",
+    "get-10-last-bridge-transaction"
   ]
 });
 
@@ -189,6 +190,96 @@ server.tool(
             {
                 type: "text",
                 text: `❌ Failed to retrieve WMON on Sepolia balance for address: \`${clientSepolia.address}\`.
+
+                **Error:** ${error instanceof Error ? error.message : String(error)}`
+            }
+          ]
+      };
+      }
+  }
+);
+
+/**
+ * Tool to get the last 10 Wormhole bridge transactions involving a given Sepolia address.
+ *
+ * This tool calls the Wormholescan Testnet API to retrieve up to 20 recent bridge operations,
+ * then selects the 10 most recent ones and formats them for display. It shows details like
+ * source and target chains, transaction hashes, gas fees, and timestamps.
+ *
+ * @returns A formatted list of the 10 most recent bridge transactions, or an error message if the API call fails.
+ */
+server.tool(
+  "get-10-last-bridge-transaction",
+  "Get and view the last 10 bridge transactions from Sepolia to Monad or Monad to Sepolia",
+  async () => {
+      try {
+
+        const getMonSep = await fetch(
+          `https://api.testnet.wormholescan.io/api/v1/operations?page=0&pageSize=10&sortOrder=DESC&address=${clientMonad.address}&appId=GENERIC_RELAYER&sourceChain=48&targetChain=10002`,
+          {
+            referrerPolicy: "strict-origin-when-cross-origin",
+            body: null,
+            method: "GET",
+            mode: "cors",
+            credentials: "include",
+          }
+        );
+        const response = await getMonSep.json();
+        const res = response?.operations || [];
+    
+        const getSepMon = await fetch(
+          `https://api.testnet.wormholescan.io/api/v1/operations?page=0&pageSize=10&sortOrder=DESC&address=${clientMonad.address}&appId=GENERIC_RELAYER&sourceChain=10002&targetChain=48`,
+          {
+            referrerPolicy: "strict-origin-when-cross-origin",
+            body: null,
+            method: "GET",
+            mode: "cors",
+            credentials: "include",
+          }
+        );
+        const response2 = await getSepMon.json();
+        const res2 = response2?.operations || [];
+    
+        const merged = [...res,...res2].slice(0,10);
+    
+        merged.sort((a, b) => {
+          const timeA = a.sourceChain.timestamp ? new Date(a.sourceChain.timestamp).getTime() : 0;
+          const timeB = b.sourceChain.timestamp ? new Date(b.sourceChain.timestamp).getTime() : 0;
+          return timeB - timeA;
+        });
+        
+        const result = [];
+    
+        for (let i = 0; i < merged.length; i++) {
+          const item = merged[i];
+          result.push({
+            sourceChain: item.sourceChain?.chainId == 48 ? `Monad` : `Sepolia`,
+            sourceHash: item.sourceChain?.transaction?.txHash,
+            sourceGasFee: item.sourceChain?.fee + ` MON`,
+            sourceTimestamp: item.sourceChain?.timestamp,
+            sourceStatus: item.sourceChain?.status,
+            targetChain: item.targetChain.chainId == 48 ? `Monad` : `Sepolia`,
+            targetHash: item.targetChain?.transaction?.txHash || ``,
+            targetGasFee: item.targetChain?.fee + ` ETH`,
+            targetTimestamp: item.targetChain?.timestamp || ``,
+            targetStatus: item.targetChain?.status || `` 
+          });
+        }
+
+      return {
+          content: [
+            {
+                type: "text",
+                text: `📨 **Last 10 Bridge Transactions** for address \`${clientMonad.address}\`\n\n${JSON.stringify(result)}`
+            }
+          ]
+      };
+      } catch (error) {
+      return {
+          content: [
+            {
+                type: "text",
+                text: `❌ Failed to fetch bridge transactions. for address: \`${clientSepolia.address}\`.
 
                 **Error:** ${error instanceof Error ? error.message : String(error)}`
             }
