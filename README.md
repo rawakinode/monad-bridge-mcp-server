@@ -14,6 +14,7 @@ This MCP server provides the following tools:
 | `get-mon-balance`                | Check MON balance on Monad testnet.                        |
 | `bridge-sepolia-wmon-to-monad`  | Bridge wrapped MON (wMON) on Sepolia to MON on Monad.      |
 | `bridge-monad-to-sepolia-wmon`  | Bridge MON from Monad to wMON on Sepolia.                  |
+| `get-wmon-sepolia-balance` | Check Wrapped MON (wMON) balance on Sepolia. |
 
 ## Quick Start
 

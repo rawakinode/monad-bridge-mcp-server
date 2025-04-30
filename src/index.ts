@@ -27,6 +27,7 @@ const server = new McpServer({
     "get-wallet-address",
     "get-eth-balance",
     "get-mon-balance",
+    "get-wmon-sepolia-balance",
     "bridge-sepolia-wmon-to-monad",
     "bridge-monad-to-sepolia-wmon",
   ]
@@ -149,6 +150,52 @@ server.tool(
         };
         }
     }
+);
+
+/**
+ * Tool to check Wrapped MONAD (WMON) balance on the Sepolia testnet
+ *
+ * This tool fetches the current balance of the Wrapped MONAD (WMON) ERC-20 token
+ * for the connected address using the Sepolia testnet. It interacts with the WMON
+ * contract and formats the response in a human-readable message.
+ *
+ * @returns An array of text content displaying the address and WMON balance,
+ * or an error message if the fetch fails.
+ */
+server.tool(
+  "get-wmon-sepolia-balance",
+  "Get Wrapped MONAD (WMON) balance for my address on Sepolia testnet ",
+  async () => {
+      try {
+
+       // Define WMON contract
+       const defineWmonContract = new ethers.Contract(WMON_SEPOLIA_CONTRACT, ERC20_ABI, clientSepolia);
+       const balance = await defineWmonContract.balanceOf(clientSepolia.address);
+
+      return {
+          content: [
+          {
+              type: "text",
+              text: `📍 **Wrapped Monad (WMON) Balance Check (Sepolia Testnet)**
+
+              **Address:** \`${clientSepolia.address}\`
+              **Balance:** ${ethers.formatUnits(balance)} WMON`
+          }
+          ]
+      };
+      } catch (error) {
+      return {
+          content: [
+            {
+                type: "text",
+                text: `❌ Failed to retrieve WMON on Sepolia balance for address: \`${clientSepolia.address}\`.
+
+                **Error:** ${error instanceof Error ? error.message : String(error)}`
+            }
+          ]
+      };
+      }
+  }
 );
   
 
