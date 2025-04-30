@@ -255,14 +255,14 @@ server.tool(
           result.push({
             sourceChain: item.sourceChain?.chainId == 48 ? `Monad` : `Sepolia`,
             sourceHash: item.sourceChain?.transaction?.txHash,
-            sourceGasFee: item.sourceChain?.fee + ` MON`,
+            sourceGasFee: item.sourceChain?.chainId == 48 ? item.sourceChain?.fee + ` MON` : item.sourceChain?.fee + ` ETH`,
             sourceTimestamp: item.sourceChain?.timestamp,
             sourceStatus: item.sourceChain?.status,
             targetChain: item.targetChain.chainId == 48 ? `Monad` : `Sepolia`,
             targetHash: item.targetChain?.transaction?.txHash || ``,
-            targetGasFee: item.targetChain?.fee + ` ETH`,
+            targetGasFee: item.targetChain?.chainId == 48 ? item.targetChain?.fee + ` MON` : item.targetChain?.fee + ` ETH`,
             targetTimestamp: item.targetChain?.timestamp || ``,
-            targetStatus: item.targetChain?.status || `` 
+            targetStatus: item.targetChain?.status || ``
           });
         }
 
