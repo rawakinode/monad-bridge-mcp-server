@@ -232,6 +232,12 @@ server.tool(
 
         // Approved token allowance for spender
         const defineWmonContract = new ethers.Contract(WMON_SEPOLIA_CONTRACT, ERC20_ABI, clientSepolia);
+        const balance = await defineWmonContract.balanceOf(clientSepolia.address);
+        if (ethers.formatUnits(balance) < amount) {
+          return { content: [{ type: "text",
+            text: `WMON balance is insufficient. The wMON balance in Sepolia is insufficient. You need ${amount} wMON to continue. But you only have ${ethers.formatUnits(balance)} wMON.`
+          }] }
+        }
         const allowance = await defineWmonContract.approve(BRIDGE_CONTRACT_FROM_SEPOLIA, bridgeAmount);
         await allowance.wait();
 
