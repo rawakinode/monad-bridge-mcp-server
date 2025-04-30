@@ -62,6 +62,32 @@ npm run build
 7. Restart Claude Desktop.
 8. When prompted, allow MCP access for the chat session `(Allow for This Chat)`.
 
+## Command Usage
+
+### Check Wallet Address
+
+- Write command `show my wallet address` on Claude.
+- Allow MCP access for the chat session `(Allow for This Chat)`.
+- Claude will respon with your wallet address from your PRIVATE_KEY.
+
+### Check Wallet Balance (ETH, MONAD, and wMON)
+
+- Write command `check our ETH balance, check our MONAD balance, and check our wmon balance on sepolia` on Claude.
+- Allow MCP access for the chat session `(Allow for This Chat)`.
+- Claude will respon with balance ETH sepolia, MON, and wMON Sepolia.
+
+### Bridge wMON Sepolia > MONAD
+
+- Write command `bridge 0.01 wmon sepolia to monad` on Claude.
+- Allow MCP access for the chat session `(Allow for This Chat)`.
+- If success, Claude will respon with success transaction details.
+
+### Bridge MONAD > wMON Sepolia
+
+- Write command `bridge 0.01 monad to wmon sepolia` on Claude.
+- Allow MCP access for the chat session `(Allow for This Chat)`.
+- If success, Claude will respon with success transaction details.
+
 ## Important Links
 
 - [View on Etherscan Sepolia](https://sepolia.etherscan.io/)
