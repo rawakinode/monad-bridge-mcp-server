@@ -69,6 +69,7 @@ npm run build
 - Write command `show my wallet address` on Claude.
 - Allow MCP access for the chat session `(Allow for This Chat)`.
 - Claude will respon with your wallet address from your PRIVATE_KEY.
+ ![image](./image/a_wallet.png)
 
 ### Check Wallet Balance (ETH, MONAD, and wMON)
 
@@ -76,17 +77,21 @@ npm run build
 - Allow MCP access for the chat session `(Allow for This Chat)`.
 - Claude will respon with balance ETH sepolia, MON, and wMON Sepolia.
 
+ ![image](./image/b_get_balance.png)
+
 ### Bridge wMON Sepolia > MONAD
 
 - Write command `bridge 0.01 wmon sepolia to monad` on Claude.
 - Allow MCP access for the chat session `(Allow for This Chat)`.
 - If success, Claude will respon with success transaction details.
+ ![image](./image/c_bridge.png)
 
 ### Bridge MONAD > wMON Sepolia
 
 - Write command `bridge 0.01 monad to wmon sepolia` on Claude.
 - Allow MCP access for the chat session `(Allow for This Chat)`.
 - If success, Claude will respon with success transaction details.
+ ![image](./image/d_bridge.png)
 
 ## Important Links
 
