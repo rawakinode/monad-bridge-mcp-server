@@ -7,15 +7,15 @@ A lightweight Model Context Protocol (MCP) server that enables bridging function
 
 This MCP server provides the following tools:
 
-| Tools Name                          | Description                                                   |
-|----------------------------------|-------------------------------------------------------------|
-| `get-wallet-address`             | Get wallet address from private key.                       |
-| `get-eth-balance`                | Check ETH balance on Sepolia testnet.                      |
-| `get-mon-balance`                | Check MON balance on Monad testnet.                        |
-| `bridge-sepolia-wmon-to-monad`  | Bridge wrapped MON (wMON) on Sepolia to MON on Monad.      |
-| `bridge-monad-to-sepolia-wmon`  | Bridge MON from Monad to wMON on Sepolia.                  |
-| `get-wmon-sepolia-balance` | Check Wrapped MON (wMON) balance on Sepolia. |
-|`get-10-last-bridge-transaction`|Get and view the last 10 bridge transactions from Sepolia to Monad or Monad to Sepolia|
+| Tools Name                          | Description                                                   | Command |
+|----------------------------------|-------------------------------------------------------------|------|
+| `get-wallet-address`             | Get wallet address from private key.                       | `show my wallet address` |
+| `get-eth-balance`                | Check ETH balance on Sepolia testnet.                      | `check our ETH balance` |
+| `get-mon-balance`                | Check MON balance on Monad testnet.                        | `check our MONAD balance` |
+| `bridge-sepolia-wmon-to-monad`  | Bridge wrapped MON (wMON) on Sepolia to MON on Monad.      | `bridge 1 mon sepolia to monad` |
+| `bridge-monad-to-sepolia-wmon`  | Bridge MON from Monad to wMON on Sepolia.                  | `bridge 1 monad to sepolia` |
+| `get-wmon-sepolia-balance` | Check Wrapped MON (wMON) balance on Sepolia. | `check our wmon balance on sepolia` |
+|`get-10-last-bridge-transaction`|Get and view the last 10 bridge transactions from Sepolia to Monad or Monad to Sepolia| `get 10 last bridge transaction` `get last bridge`|
 
 ## Quick Start
 
