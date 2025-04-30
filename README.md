@@ -7,7 +7,7 @@ A lightweight Model Context Protocol (MCP) server that enables bridging function
 
 This MCP server provides the following tools:
 
-| Name                          | Decription                                                   |
+| Tools Name                          | Description                                                   |
 |----------------------------------|-------------------------------------------------------------|
 | `get-wallet-address`             | Get wallet address from private key.                       |
 | `get-eth-balance`                | Check ETH balance on Sepolia testnet.                      |
