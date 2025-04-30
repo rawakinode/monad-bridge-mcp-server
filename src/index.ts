@@ -12,8 +12,8 @@ require('dotenv').config();
 const PRIVATE_KEY = process.env.PRIVATE_KEY!;
 
 // Initiate Provider
-const sepoliaProvider = new ethers.JsonRpcProvider("https://eth-sepolia.g.alchemy.com/v2/l_Ke2DDFnO33DiHtXTXVlsyZdJEcnh0h");
-const monadProvider = new ethers.JsonRpcProvider("https://monad-testnet.g.alchemy.com/v2/a7yt4T3V-ndJMoHBFdRmOmahf2Huaa2W");
+const sepoliaProvider = new ethers.JsonRpcProvider("https://1rpc.io/sepolia");
+const monadProvider = new ethers.JsonRpcProvider("https://testnet-rpc.monad.xyz");
 
 // Init client for wallet
 const clientSepolia = new ethers.Wallet(PRIVATE_KEY, sepoliaProvider);
